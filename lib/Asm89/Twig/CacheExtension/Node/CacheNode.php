@@ -39,9 +39,11 @@ class CacheNode extends \Twig_Node
     {
         $i = self::$cacheCount++;
 
+        $extension = 'Asm89\Twig\CacheExtension\Extension';
+
         $compiler
             ->addDebugInfo($this)
-            ->write("\$asm89CacheStrategy".$i." = \$this->env->getExtension('asm89_cache')->getCacheStrategy();\n")
+            ->write("\$asm89CacheStrategy".$i." = \$this->env->getExtension('{$extension}')->getCacheStrategy();\n")
             ->write("\$asm89Key".$i." = \$asm89CacheStrategy".$i."->generateKey(")
                 ->subcompile($this->getNode('annotation'))
                 ->raw(", ")
